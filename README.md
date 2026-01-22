@@ -162,6 +162,6 @@ server_project/
 - `position` (INTEGER)
 - `created_at` (DATETIME)
 
-## License
+## Deployment
 
-ISC
+https://webdevcourse-server-project.onrender.com
