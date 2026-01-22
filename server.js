@@ -40,6 +40,14 @@ app.use('/auth', authRoutes);
 app.use('/', homeRoutes);
 app.use('/favorites', favoritesRoutes);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server is running' });
+});
+
+app.use((req, res) => {
+  res.status(404).send('Page not found');
+});
+
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).send('Internal server error');
