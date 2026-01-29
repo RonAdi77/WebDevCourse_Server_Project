@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: serverapp
+    env: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: DATABASE_PATH
+        value: ./db.sqlite

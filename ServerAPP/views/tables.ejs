@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="bi bi-play-circle"></i> YouTube Favorites</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/favorites">Favorites</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/tables">Table Data</a></li>
+                    <li class="nav-item"><span class="nav-link">Hello, <%= user.fullName %></span></li>
+                    <li class="nav-item">
+                        <form method="POST" action="/logout" class="d-inline">
+                            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-4">
+        <h1 class="mb-4"><i class="bi bi-table"></i> Database Tables</h1>
+        <% if (typeof error !== "undefined" && error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white"><h5 class="mb-0">Users</h5></div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead><tr><th>id</th><th>email</th><th>fullName</th><th>createdAt</th></tr></thead>
+                    <tbody>
+                        <% if (users && users.length) { users.forEach(function(row) { %>
+                            <tr><td><%= row.id %></td><td><%= row.email %></td><td><%= row.fullName %></td><td><%= row.createdAt %></td></tr>
+                        <% }); } else { %>
+                            <tr><td colspan="4" class="text-muted">No rows</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white"><h5 class="mb-0">Favorites</h5></div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead><tr><th>id</th><th>user_id</th><th>video_id</th><th>title</th><th>position</th><th>created_at</th></tr></thead>
+                    <tbody>
+                        <% if (favorites && favorites.length) { favorites.forEach(function(row) { %>
+                            <tr><td><%= row.id %></td><td><%= row.user_id %></td><td><%= row.video_id %></td><td><%= row.title %></td><td><%= row.position %></td><td><%= row.created_at %></td></tr>
+                        <% }); } else { %>
+                            <tr><td colspan="6" class="text-muted">No rows</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white"><h5 class="mb-0">Sessions (per user)</h5></div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead><tr><th>sid</th><th>user_id</th><th>email</th><th>fullName</th><th>expires</th></tr></thead>
+                    <tbody>
+                        <% if (sessions && sessions.length) { sessions.forEach(function(row) { %>
+                            <% if (row.note) { %>
+                                <tr><td colspan="5" class="text-muted"><%= row.note %></td></tr>
+                            <% } else { %>
+                                <tr>
+                                    <td title="<%= row.sid %>"><%= row.sidShort || row.sid %></td>
+                                    <td><%= row.user_id != null ? row.user_id : '-' %></td>
+                                    <td><%= row.email || '-' %></td>
+                                    <td><%= row.fullName || '-' %></td>
+                                    <td><%= row.expires %></td>
+                                </tr>
+                            <% } %>
+                        <% }); } else { %>
+                            <tr><td colspan="5" class="text-muted">No rows</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container"><p class="mb-0 text-muted">&copy; YouTube Favorites App</p></div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

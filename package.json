@@ -1,22 +1,12 @@
 {
-  "name": "mvc-web-app",
+  "name": "server-project",
   "version": "1.0.0",
-  "description": "MVC Web Application with SQLite, Authentication, and YouTube Favorites",
-  "main": "server.js",
+  "description": "MVC Web Application (ServerAPP) - SQLite, Auth, YouTube Favorites",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "cd ServerAPP && npm start",
+    "dev": "cd ServerAPP && npm run dev"
   },
   "keywords": ["mvc", "express", "sqlite", "authentication"],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "ejs": "^3.1.9",
-    "sqlite3": "^5.1.6",
-    "bcrypt": "^5.1.1",
-    "express-session": "^1.17.3",
-    "dotenv": "^16.3.1",
-    "axios": "^1.6.2"
-  }
+  "license": "ISC"
 }
