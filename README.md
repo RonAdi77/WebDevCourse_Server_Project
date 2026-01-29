@@ -1,33 +1,33 @@
 # Server Project – MVC Web App (ServerAPP)
 
-האפליקציה רצה מתוך תיקיית **ServerAPP**.
+The application runs from the **ServerAPP** folder.
 
-## דרישות שמומשו
+## Implemented Requirements
 
-### 1) הרצה און-ליין (Render) + Login / Register / Logout + SQLite
-- **משתמשים** ו-**Sessions** נשמרים ב-SQLite (טבלאות Users + connect-sqlite3).
-- אחרי **Register** או **התחברות** – מעבר למסך ראשי כמחובר, עם פרטי המשתמש וכפתור התנתקות.
-- אם המשתמש **לא מחובר** – מוצג מסך **Login** עם לינק ל-**Register**.
+### 1) Run Online (Render) + Login / Register / Logout + SQLite
+- **Users** and **Sessions** are stored in SQLite (Users table + connect-sqlite3).
+- After **Register** or **Login** – redirect to home as logged in, with user details and logout button.
+- If the user is **not logged in** – show **Login** page with link to **Register**.
 
-### 2) דף מועדפים (MVC + DB)
-- דף חדש: **חיפוש סרטונים ב-YouTube** (חלק עליון) ו**רשימת סרטונים שמורים** (חלק תחתון).
-- שמירה למועדפים בלחיצה על הסרטון; מחיקה מהרשימה.
-- גישה לדף **רק לאחר התחברות**; טבלת **favorites** ב-DB.
-- עיצוב עם **Bootstrap**; אופציונלי: שינוי סדר (drag & drop).
+### 2) Favorites Page (MVC + DB)
+- New page: **YouTube video search** (top section) and **saved videos list** (bottom section).
+- Save to favorites by clicking the video; delete from the list.
+- Access to the page **only after login**; **favorites** table in DB.
+- Styled with **Bootstrap**; optional: reorder (drag & drop).
 
-### 3) הצגת נתוני טבלאות
-- דף **Table Data** (`/tables`) – הצגת נתונים מטבלאות **Users**, **Favorites**, **Sessions** (לאחר התחברות).
+### 3) Table Data Display
+- **Table Data** page (`/tables`) – displays data from **Users**, **Favorites**, **Sessions** tables (after login).
 
 ---
 
-## הרצה מקומית
+## Local Run
 
 ```bash
 cd ServerAPP
 npm install
 ```
 
-צור קובץ `.env` בתוך ServerAPP (ראה `ServerAPP/.env.example`):
+Create a `.env` file inside ServerAPP (see `ServerAPP/.env.example`):
 
 ```env
 PORT=3000
@@ -36,40 +36,40 @@ YOUTUBE_API_KEY=your-youtube-api-key
 DATABASE_PATH=./db.sqlite
 ```
 
-הרצה:
+Run:
 
 ```bash
 cd ServerAPP && npm start
 ```
 
-או מהשורש:
+Or from the project root:
 
 ```bash
 npm start
 ```
 
-האפליקציה: `http://localhost:3000`
+App URL: `http://localhost:3000`
 
 ---
 
-## Deployment ל-Render
+## Deployment to Render
 
-1. העלה את הפרויקט ל-GitHub.
-2. ב-Render: New → Web Service, חבר את ה-repo.
+1. Push the project to GitHub.
+2. On Render: New → Web Service, connect the repo.
 3. **Root Directory**: `ServerAPP`
 4. **Build Command**: `npm install`
 5. **Start Command**: `node app.js`
-6. **Environment**: הוסף `SESSION_SECRET`, `YOUTUBE_API_KEY`, `DATABASE_PATH` (אופציונלי).
+6. **Environment**: Add `SESSION_SECRET`, `YOUTUBE_API_KEY`, `DATABASE_PATH` (optional).
 
-קובץ `ServerAPP/render.yaml` מכיל הגדרות לדוגמה.
+File `ServerAPP/render.yaml` contains sample configuration.
 
 ---
 
-## מבנה הפרויקט
+## Project Structure
 
 ```
 server_project/
-├── ServerAPP/          ← האפליקציה (MVC, SQLite, Auth, Favorites, Table Data)
+├── ServerAPP/          ← The app (MVC, SQLite, Auth, Favorites, Table Data)
 │   ├── app.js
 │   ├── config/
 │   ├── controllers/
@@ -91,4 +91,4 @@ server_project/
 ## Deployment (Render)
 
 - **URL**: https://webdevcourse-server-project.onrender.com
-- **חשוב**: ב-Render הגדר **Root Directory** = `ServerAPP`, **Start Command** = `node app.js`.
+- **Important**: In Render set **Root Directory** = `ServerAPP`, **Start Command** = `node app.js`.
