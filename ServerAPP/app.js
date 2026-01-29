@@ -10,6 +10,9 @@ const requireAuth = require("./middleware/requireAuth");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// trust proxy (required for cookies/session behind Render/HTTPS)
+app.set("trust proxy", 1);
+
 // view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +30,13 @@ app.use(sessionMiddleware);
 // make user available in views
 app.use((req, res, next) => {
     res.locals.user = req.session.user || null;
+    next();
+});
+
+// debug: log every request and session state
+app.use((req, res, next) => {
+    const hasUser = !!req.session?.user;
+    console.log(`[DEBUG] ${req.method} ${req.path} | session.user: ${hasUser ? `id=${req.session.user.id} ${req.session.user.email}` : "none"}`);
     next();
 });
 
@@ -52,4 +62,7 @@ app.use((req, res) => {
     res.status(404).send("Not Found");
 });
 
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`[DEBUG] Server started | PORT=${PORT} NODE_ENV=${process.env.NODE_ENV || "undefined"}`);
+    console.log(`http://localhost:${PORT}`);
+});
